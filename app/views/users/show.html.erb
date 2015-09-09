@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+
+<strong>global messages:</strong>
+<p>
+  <% @messages.each do |msg| %>
+    <%= "read? #{$redis.getbit("global-msg#{msg.id}", @user.id)}"%><br>
+    <%= "#{msg.title} : #{msg.body}" %><br>
+    <br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
